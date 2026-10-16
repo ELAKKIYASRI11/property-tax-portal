@@ -1,0 +1,11 @@
+{
+  "name": "property-tax-portal",
+  "version": "1.0.0",
+  "description": "Web-Based Property Tax Self-Assessment & Payment Compliance Tracking Portal (Team VEM)",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "node server/server.js",
+    "seed": "node server/seed.js"
+  }
+}

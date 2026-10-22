@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: proptax-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=property_tax_portal
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: proptax-portal
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/property_tax_portal
+      - JWT_SECRET=vem_property_tax_secret_key_2026_super_secure
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
